@@ -9,7 +9,6 @@
     <meta charset="utf-8">
 
     <link rel="stylesheet" href="https://api.chayns.net/css/v4.2">
-    <link rel='stylesheet' href='index.css'>
 
     <title>chayns® ESNext Template</title>
 </head>
@@ -25,11 +24,31 @@
             </p>
         </div>
 
+        <div class="accordion" data-group="1">
+            <div class="accordion__head">
+                <div class="accordion__head__icon accordion--trigger">
+                    <i class="ts-angle-right"></i>
+                </div>
+                <div class="accordion__head__title  accordion--trigger">
+                    Hinzufügen
+                </div>
+            </div>
+            <div class="accordion__body ">
+                <div class='formular'>
+                    <input class="input" type="text" placeholder="Name">
+                    <input class="input" type="text" placeholder="Url">
+                    <input class="input" type="text" placeholder="eMail">
+                    <input class="input" type="text" placeholder="Kommentar">
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://api.chayns-static.space/js/v4.0/chayns.min.js"></script>
+    <script src="https://api.chayns-static.space/ui/v4.0/chayns-ui.min.js"></script>
     <script src="https://polyfillsvc.tobit.com/polyfill.min.js?flags=gated&features=default,es6,Map,fetch"></script>
-    <script src='index.js'></script>
+    <script src='./index.js'></script>
 </body>
 
 </html>
