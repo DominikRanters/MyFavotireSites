@@ -4,19 +4,24 @@
 }
 
 .formular {
-    padding: 0 25px;
+    padding: 0 12px;
 }
 
 .formular>input {
     width: 100%;
-    margin: 10px 0;
-}
-
-.cc__list>input {
-    width: 100%;
+    margin: 5px 0;
 }
 
 .cc__list {
+    width: 100%;
+}
+
+.searchContainer {
+    padding: 8px;
+    width: 100%;
+}
+
+.searchContainer>input {
     width: 100%;
 }
 
@@ -33,7 +38,7 @@
 }
 
 .button {
-    margin: 5px 12px 12px;
+    margin: 7px 12px 12px;
 }
 
 .accordion__head__title {
