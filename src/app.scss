@@ -3,7 +3,16 @@
     flex-direction: column;
 }
 
-input {
+.formular>input {
     width: 90%;
     margin: 10px;
+}
+
+.accordion__head__right>input {
+    margin: 0px 40px 0 0px;
+}
+
+.sites_head {
+    margin-bottom: 10px;
+    box-sizing: border-box;
 }
