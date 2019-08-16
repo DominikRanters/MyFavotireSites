@@ -1,8 +1,11 @@
 import './app.scss'
 
+
+const $list = document.querySelector('.sitesList');
+
 class Tapproject {
     constructor() {
-        fetch('https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=love&Skip=0&Take=50')
+        fetch('https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=Feuerwehr&Skip=0&Take=50')
             .then(function(response) {
                 return response.json()
             }).then(function(json) {
@@ -11,22 +14,30 @@ class Tapproject {
                 const jsonData = json.Data;
                 let sitesList = '';
 
+                let listItem = document.createElement("div");
+                listItem.className = "list-item list-item--clickable";
+                let listItemHeader = document.createElement("div");
+                listItemHeader.className = 'list-item__header';
+                let listItemTitles = document.createElement("div");
+                listItemTitles.className = 'list-item__titles';
+                let listItemImage = document.createElement('div');
+                listItemImage.className = 'list-item__image';
+                let listItemTitle = document.createElement('div');
+                listItemTitle.className = 'list-item__title ellipsis';
+
                 console.log('parsed json', json.Data)
 
-                for (let i = 0; i < data.length; i++) {
-                    sitesList +=
-                        '<div class="list-item list-item--clickable">' +
-                        '<div class="list-item__header">' +
-                        '<div class="list-item__image" style="background-image: url(&quot;https://chayns.tobit.com/storage/' + jsonData.siteId + '/Images/icon-72.png&quot;);"></div>' +
-                        '<div class="list-item__titles">' +
-                        '<div class="list-item__title ellipsis">' + jsonData.appstoreName + '</div>' +
-                        '</div>' +
-                        '<div class="list-item__spacer"></div>' +
-                        '</div>' +
-                        '</div>'
+                for (let i = 0; i < jsonData.length; i++) {
 
+                    //listItemImageStylelistItemImageStyle.style = 'background-image: url(&quot;https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png&quot;)';
+                    let listItemTitleNode = document.createTextNode(jsonData[i].appstoreName);
+                    listItemTitle.appendChild(listItemTitleNode);
 
-                    console.log(data[i].siteId);
+                    $list.appendChild(listItem);
+                    listItem.appendChild(listItemHeader);
+                    listItemHeader.appendChild(listItemImage);
+                    listItemHeader.appendChild(listItemTitles);
+                    listItemTitles.appendChild(listItemTitle);
                 }
 
             }).catch(function(ex) {
