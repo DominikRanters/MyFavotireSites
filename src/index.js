@@ -7,9 +7,16 @@ class Tapproject {
                 return response.json()
             }).then(function(json) {
                 console.log('parsed json', json)
+                this._getData(json);
             }).catch(function(ex) {
                 console.log('parsing failed', ex)
             })
+    }
+
+    _getData(json) {
+        for (let i = 0; i < json.Data.Length; i++) {
+            console.log(i);
+        }
     }
 
 
