@@ -6,15 +6,31 @@ const $Name = document.querySelector('.formularLine1');
 const $Url = document.querySelector('.formularLine2');
 const $eMail = document.querySelector('.formularLine3');
 const $Kommentar = document.querySelector('.formularLine4');
+const $Search = document.querySelector('.search');
+
+let url;
 
 class Tapproject {
     constructor() {
 
 
-
         this._eventlistner();
+        this._fetchUrl('love');
 
-        fetch('https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=SV&Skip=0&Take=50')
+
+    }
+
+    _fetchUrl(searchValue) {
+
+        if ($list.childElementCount > 0) {
+            while ($list.firstChild) {
+                $list.removeChild($list.firstChild);
+            }
+        }
+
+        url = 'https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=' + searchValue + '&Skip=0&Take=50'
+
+        fetch(url)
             .then(function(response) {
                 return response.json()
             }).then(function(json) {
@@ -48,11 +64,16 @@ class Tapproject {
             }).catch(function(ex) {
                 console.log('parsing failed', ex)
             })
-
     }
 
     _eventlistner() {
         $button.addEventListener('click', this._getFormularData);
+        $Search.addEventListener('keypress', (e) => {
+            var key = e.which || e.keyCode;
+            if (key === 13) {
+                this._fetchUrl($Search.value);
+            }
+        });
     }
 
     _getFormularData() {
@@ -66,15 +87,12 @@ class Tapproject {
                 $eMail.value = '';
                 $Kommentar.value = '';
                 chayns.dialog.alert('', 'thank you');
-
             }
-
         });
-
     }
 }
 
 chayns.ready.then(() => {
     chayns.ui.initAll();
     new Tapproject();
-}).catch((error) => console.log("No Chayns", error));
+}).catch((error) => console.log("No Chayns", error))
