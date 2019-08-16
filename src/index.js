@@ -77,12 +77,7 @@ class Tapproject {
 
     _eventlistner() {
         $button.addEventListener('click', this._getFormularData);
-        $Search.addEventListener('keypress', (e) => {
-            var key = e.which || e.keyCode;
-            if (key === 13) {
-                this._fetchUrl($Search.value);
-            }
-        });
+        $Search.addEventListener('keyup', () => this._fetchUrl($Search.value));
     }
 
     _getFormularData() {
