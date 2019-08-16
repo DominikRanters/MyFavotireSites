@@ -7,6 +7,7 @@ const $Url = document.querySelector('.formularLine2');
 const $eMail = document.querySelector('.formularLine3');
 const $Kommentar = document.querySelector('.formularLine4');
 const $Search = document.querySelector('.search');
+const http = new XMLHttpRequest();
 
 let url;
 
@@ -50,7 +51,15 @@ class Tapproject {
                     let listItemTitle = document.createElement('div');
                     listItemTitle.className = 'list-item__title ellipsis';
 
-                    listItemImage.style.backgroundImage = 'url(https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png)';
+                    try {
+                        http.open('HEAD', 'https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png', false);
+                        http.send();
+                        listItemImage.style.backgroundImage = 'url(https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png)';
+                    } catch {
+                        listItemImage.style.backgroundImage = 'url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)';
+                    }
+
+
                     let listItemTitleNode = document.createTextNode(jsonData[i].appstoreName);
 
                     listItemTitle.appendChild(listItemTitleNode);
@@ -77,18 +86,25 @@ class Tapproject {
     }
 
     _getFormularData() {
-
-        chayns.intercom.sendMessageToPage({
-            text: 'Hier ist meine Seite! Name: ' + $Name.value + '. Url: ' + $Url.value + '. eMail: ' + $eMail.value + '. Kommentar: ' + $Kommentar.value + '.'
-        }).then(function(data) {
-            if (data.status == 200) {
-                $Name.value = '';
-                $Url.value = '';
-                $eMail.value = '';
-                $Kommentar.value = '';
-                chayns.dialog.alert('', 'thank you');
-            }
-        });
+        if ($eMail.value.indexOf('@') === -1) {
+            chayns.dialog.alert('', "invalid eMail");
+        } else if ($Url.value.indexOf('https://') === -1) {
+            chayns.dialog.alert('', "invalid Url. you need a https:// site");
+        } else if ($Name.value != '' && $Url.value != '' && $eMail.value != '') {
+            chayns.intercom.sendMessageToPage({
+                text: 'Hier ist meine Seite! Name: ' + $Name.value + '. Url: ' + $Url.value + '. eMail: ' + $eMail.value + '. Kommentar: ' + $Kommentar.value + '.'
+            }).then(function(data) {
+                if (data.status == 200) {
+                    $Name.value = '';
+                    $Url.value = '';
+                    $eMail.value = '';
+                    $Kommentar.value = '';
+                    chayns.dialog.alert('', 'thank you');
+                }
+            });
+        } else {
+            chayns.dialog.alert('', 'Alle Felder mit einem * ausfüllen');
+        }
     }
 }
 
