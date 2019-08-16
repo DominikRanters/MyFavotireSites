@@ -1,51 +1,77 @@
 import './app.scss'
 
-
 const $list = document.querySelector('.sitesList');
+const $button = document.querySelector('.button');
+const $Name = document.querySelector('.formularLine1');
+const $Url = document.querySelector('.formularLine2');
+const $eMail = document.querySelector('.formularLine3');
+const $Kommentar = document.querySelector('.formularLine4');
 
 class Tapproject {
     constructor() {
-        fetch('https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=Feuerwehr&Skip=0&Take=50')
+
+
+
+        this._eventlistner();
+
+        fetch('https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=SV&Skip=0&Take=50')
             .then(function(response) {
                 return response.json()
             }).then(function(json) {
 
-
                 const jsonData = json.Data;
-                let sitesList = '';
-
-                let listItem = document.createElement("div");
-                listItem.className = "list-item list-item--clickable";
-                let listItemHeader = document.createElement("div");
-                listItemHeader.className = 'list-item__header';
-                let listItemTitles = document.createElement("div");
-                listItemTitles.className = 'list-item__titles';
-                let listItemImage = document.createElement('div');
-                listItemImage.className = 'list-item__image';
-                let listItemTitle = document.createElement('div');
-                listItemTitle.className = 'list-item__title ellipsis';
-
-                console.log('parsed json', json.Data)
 
                 for (let i = 0; i < jsonData.length; i++) {
 
-                    //listItemImageStylelistItemImageStyle.style = 'background-image: url(&quot;https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png&quot;)';
-                    let listItemTitleNode = document.createTextNode(jsonData[i].appstoreName);
-                    listItemTitle.appendChild(listItemTitleNode);
+                    let listItem = document.createElement("div");
+                    listItem.className = "list-item list-item--clickable";
+                    let listItemHeader = document.createElement("div");
+                    listItemHeader.className = 'list-item__header';
+                    let listItemTitles = document.createElement("div");
+                    listItemTitles.className = 'list-item__titles';
+                    let listItemImage = document.createElement('div');
+                    listItemImage.className = 'list-item__image';
+                    let listItemTitle = document.createElement('div');
+                    listItemTitle.className = 'list-item__title ellipsis';
 
-                    $list.appendChild(listItem);
-                    listItem.appendChild(listItemHeader);
+                    listItemImage.style.backgroundImage = 'url(https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png)';
+                    let listItemTitleNode = document.createTextNode(jsonData[i].appstoreName);
+
+                    listItemTitle.appendChild(listItemTitleNode);
+                    listItemTitles.appendChild(listItemTitle);
                     listItemHeader.appendChild(listItemImage);
                     listItemHeader.appendChild(listItemTitles);
-                    listItemTitles.appendChild(listItemTitle);
+                    listItem.appendChild(listItemHeader);
+                    $list.appendChild(listItem);
                 }
 
             }).catch(function(ex) {
                 console.log('parsing failed', ex)
             })
+
     }
 
+    _eventlistner() {
+        $button.addEventListener('click', this._getFormularData);
+    }
 
+    _getFormularData() {
+
+        chayns.intercom.sendMessageToPage({
+            text: 'Hier ist meine Seite! Name: ' + $Name.value + '. Url: ' + $Url.value + '. eMail: ' + $eMail.value + '. Kommentar: ' + $Kommentar.value + '.'
+        }).then(function(data) {
+            if (data.status == 200) {
+                $Name.value = '';
+                $Url.value = '';
+                $eMail.value = '';
+                $Kommentar.value = '';
+                chayns.dialog.alert('', 'thank you');
+
+            }
+
+        });
+
+    }
 }
 
 chayns.ready.then(() => {
