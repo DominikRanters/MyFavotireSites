@@ -3,20 +3,39 @@
     flex-direction: column;
 }
 
+.formular {
+    padding: 0 25px;
+}
+
 .formular>input {
-    width: 90%;
-    margin: 10px;
+    width: 100%;
+    margin: 10px 0;
 }
 
-.accordion__head__right>input {
-    margin: 0px 40px 0 0px;
-}
-
-.sites_head {
-    margin-bottom: 10px;
-    box-sizing: border-box;
+.cc__list>input {
+    width: 100%;
 }
 
 .cc__list {
     width: 100%;
+}
+
+.accordion__item.list {
+    padding: 0;
+}
+
+.cc__list .list-item__header {
+    padding: 12px;
+}
+
+.accordion__head {
+    padding-left: 8px;
+}
+
+.button {
+    margin: 12px;
+}
+
+.accordion__head__title {
+    margin-left: 5px;
 }
