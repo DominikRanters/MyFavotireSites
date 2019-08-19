@@ -1,8 +1,6 @@
 const $list = document.querySelector('.sitesList');
 const http = new XMLHttpRequest();
 
-
-
 class list {
 
     constructor() {
@@ -21,7 +19,6 @@ class list {
             }).catch((ex) => {
                 console.log(`Eroor`, ex)
             })
-
     }
 
     _fillSiteList(allData) {
