@@ -1,4 +1,5 @@
 const $list = document.querySelector('.sitesList');
+const classListItem = 'list-item list-item--clickable';
 
 class list {
 
@@ -29,7 +30,7 @@ class list {
             for (let data of allData) {
 
                 let listItem = document.createElement("div");
-                listItem.className = "list-item list-item--clickable";
+                listItem.className = classListItem;
                 let listItemHeader = document.createElement("div");
                 listItemHeader.className = 'list-item__header';
                 let listItemTitles = document.createElement("div");
