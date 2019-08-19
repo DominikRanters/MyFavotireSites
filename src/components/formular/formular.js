@@ -9,10 +9,10 @@ class formular {
         if ($Name.value === '' || $Url.value === '' || $eMail.value === '') {
             chayns.dialog.alert('', 'Füllen Sie alle Felder mit einem * aus.');
 
-        } else if ($eMail.value.indexOf('@') === -1) {
+        } else if (!$eMail.value.includes('@')) {
             chayns.dialog.alert('', "Die Email exestiert nicht.");
 
-        } else if ($Url.value.indexOf('.') === -1) {
+        } else if (!$Url.value.includes('.')) {
             chayns.dialog.alert('', "Keine gültige Url");
 
         } else if ($Name.value !== '' && $Url.value !== '' && $eMail.value !== '' && $Kommentar.value !== '') {

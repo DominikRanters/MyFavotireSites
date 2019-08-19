@@ -1,11 +1,7 @@
 const $list = document.querySelector('.sitesList');
-const http = new XMLHttpRequest();
+let url;
 
 class list {
-
-    constructor() {
-        let url;
-    }
 
     _fetchUrl(searchValue) {
 
@@ -13,7 +9,7 @@ class list {
 
         fetch(url)
             .then((response) => {
-                return response.json()
+                return response.json();
             }).then((json) => {
                 this._fillSiteList(json.Data);
             }).catch((ex) => {
@@ -44,16 +40,7 @@ class list {
                 let listItemTitle = document.createElement('div');
                 listItemTitle.className = 'list-item__title ellipsis';
 
-                try {
-
-                    http.open('HEAD', `https://chayns.tobit.com/storage/${data.siteId}/Images/icon-72.png`, false);
-                    http.send();
-
-                    listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${data.siteId}/Images/icon-72.png)`;
-
-                } catch {
-                    listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)`;
-                }
+                listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${data.siteId}/Images/icon-72.png)`;
 
 
                 let listItemTitleNode = document.createTextNode(data.appstoreName);
