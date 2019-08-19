@@ -1,42 +1,39 @@
-const $Name = document.querySelector('.formularLine1');
-const $Url = document.querySelector('.formularLine2');
-const $eMail = document.querySelector('.formularLine3');
-const $Kommentar = document.querySelector('.formularLine4');
+import formularText from './text'
 
 class formular {
 
     _getFormularData() {
-        if ($Name.value === '' || $Url.value === '' || $eMail.value === '') {
-            chayns.dialog.alert('', 'Füllen Sie alle Felder mit einem * aus.');
+        if (formularText.$Name.value === formularText.emptyString || formularText.$Url.value === formularText.emptyString || formularText.$eMail.value === formularText.emptyString) {
+            chayns.dialog.alert(formularText.emptyString, formularText.fillAllImportent);
 
-        } else if (!$eMail.value.includes('@')) {
-            chayns.dialog.alert('', "Die Email exestiert nicht.");
+        } else if (!formularText.$eMail.value.includes('@')) {
+            chayns.dialog.alert(formularText.emptyString, "Die Email exestiert nicht.");
 
-        } else if (!$Url.value.includes('.')) {
-            chayns.dialog.alert('', "Keine gültige Url");
+        } else if (!formularText.$Url.value.includes('.')) {
+            chayns.dialog.alert(formularText.emptyString, "Keine gültige Url");
 
-        } else if ($Name.value !== '' && $Url.value !== '' && $eMail.value !== '' && $Kommentar.value !== '') {
+        } else if (formularText.$Name.value !== formularText.emptyString && formularText.$Url.value !== formularText.emptyString && formularText.$eMail.value !== formularText.emptyString && formularText.$Kommentar.value !== formularText.emptyString) {
             chayns.intercom.sendMessageToPage({
-                text: `Hier ist meine Seite! Name:${$Name.value}. Url: ${$Url.value}. eMail: ${$eMail.value}. Kommentar: ${$Kommentar.value}.`
+                text: `Hier ist meine Seite! Name:${formularText.$Name.value}. Url: ${formularText.$Url.value}. eMail: ${formularText.$eMail.value}. Kommentar: ${formularText.$Kommentar.value}.`
             }).then(function(data) {
                 if (data.status == 200) {
-                    $Name.value = '';
-                    $Url.value = '';
-                    $eMail.value = '';
-                    $Kommentar.value = '';
-                    chayns.dialog.alert('', 'Ihre Seite wird geprüft und anschließend hinzugefügt');
+                    formularText.$Name.value = formularText.emptyString;
+                    formularText.$Url.value = formularText.emptyString;
+                    formularText.$eMail.value = formularText.emptyString;
+                    formularText.$Kommentar.value = formularText.emptyString;
+                    chayns.dialog.alert(formularText.emptyString, 'Ihre Seite wird geprüft und anschließend hinzugefügt');
                 }
             })
 
-        } else if ($Name.value !== '' && $Url.value !== '' && $eMail.value !== '') {
+        } else if (formularText.$Name.value !== formularText.emptyString && formularText.$Url.value !== formularText.emptyString && formularText.$eMail.value !== formularText.emptyString) {
             chayns.intercom.sendMessageToPage({
-                text: `Hier ist meine Seite! Name:${$Name.value}. Url: ${$Url.value}. eMail: ${$eMail.value}.`
+                text: `Hier ist meine Seite! Name:${formularText.$Name.value}. Url: ${formularText.$Url.value}. eMail: ${formularText.$eMail.value}.`
             }).then(function(data) {
                 if (data.status == 200) {
-                    $Name.value = '';
-                    $Url.value = '';
-                    $eMail.value = '';
-                    chayns.dialog.alert('', 'Ihre Seite wird geprüft und anschließend hinzugefügt');
+                    formularText.$Name.value = formularText.emptyString;
+                    formularText.$Url.value = formularText.emptyString;
+                    formularText.$eMail.value = formularText.emptyString;
+                    chayns.dialog.alert(formularText.emptyString, 'Ihre Seite wird geprüft und anschließend hinzugefügt');
                 }
             });
         }

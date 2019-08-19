@@ -1,5 +1,4 @@
-const $list = document.querySelector('.sitesList');
-const classListItem = 'list-item list-item--clickable';
+import listText from './text'
 
 class list {
 
@@ -29,16 +28,16 @@ class list {
             //never Rebase on develop, if you want to keep the feature!!!!
             for (let data of allData) {
 
-                let listItem = document.createElement("div");
-                listItem.className = classListItem;
-                let listItemHeader = document.createElement("div");
-                listItemHeader.className = 'list-item__header';
-                let listItemTitles = document.createElement("div");
-                listItemTitles.className = 'list-item__titles';
-                let listItemImage = document.createElement('div');
-                listItemImage.className = 'list-item__image'; //Just for testing
-                let listItemTitle = document.createElement('div');
-                listItemTitle.className = 'list-item__title ellipsis';
+                let listItem = document.createElement(listText.div);
+                listItem.className = listText.classListItem;
+                let listItemHeader = document.createElement(listText.div);
+                listItemHeader.className = listText.classItemHeader;
+                let listItemTitles = document.createElement(listText.div);
+                listItemTitles.className = listText.classItemTitles
+                let listItemImage = document.createElement(listText.div);
+                listItemImage.className = listText.classItemImage
+                let listItemTitle = document.createElement(listText.div);
+                listItemTitle.className = listText.classItemTitle
 
                 listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${data.siteId}/Images/icon-72.png)`;
 
@@ -50,9 +49,9 @@ class list {
                 listItemHeader.appendChild(listItemImage);
                 listItemHeader.appendChild(listItemTitles);
                 listItem.appendChild(listItemHeader);
-                $list.appendChild(listItem);
+                listText.$list.appendChild(listItem);
 
-                listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${data.siteId}/`));
+                listText.listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${data.siteId}/`));
             }
         }
     }
