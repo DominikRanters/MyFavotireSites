@@ -23,12 +23,6 @@ class Tapproject {
 
     _fetchUrl(searchValue) {
 
-        if ($list.childElementCount > 0) {
-            while ($list.firstChild) {
-                $list.removeChild($list.firstChild);
-            }
-        }
-
         url = 'https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=' + searchValue + '&Skip=0&Take=50'
 
         fetch(url)
@@ -36,9 +30,13 @@ class Tapproject {
                 return response.json()
             }).then(function(json) {
 
-                const jsonData = json.Data;
+                if ($list.childElementCount > 0) {
+                    while ($list.firstChild) {
+                        $list.removeChild($list.firstChild);
+                    }
+                }
 
-                for (let i = 0; i < jsonData.length; i++) {
+                for (let item of json.Data) {
 
                     let listItem = document.createElement("div");
                     listItem.className = "list-item list-item--clickable";
@@ -52,15 +50,15 @@ class Tapproject {
                     listItemTitle.className = 'list-item__title ellipsis';
 
                     try {
-                        http.open('HEAD', `https://chayns.tobit.com/storage/${jsonData[i].siteId}/Images/icon-72.png`, false);
+                        http.open('HEAD', `https://chayns.tobit.com/storage/${item.siteId}/Images/icon-72.png`, false);
                         http.send();
-                        listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${jsonData[i].siteId}/Images/icon-72.png)`;
+                        listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${item.siteId}/Images/icon-72.png)`;
                     } catch {
                         listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)`;
                     }
 
 
-                    let listItemTitleNode = document.createTextNode(jsonData[i].appstoreName);
+                    let listItemTitleNode = document.createTextNode(item.appstoreName);
 
                     listItemTitle.appendChild(listItemTitleNode);
                     listItemTitles.appendChild(listItemTitle);
@@ -69,7 +67,7 @@ class Tapproject {
                     listItem.appendChild(listItemHeader);
                     $list.appendChild(listItem);
 
-                    listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${jsonData[i].siteId}/`));
+                    listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${item.siteId}/`));
                 }
 
             }).catch(function(ex) {
