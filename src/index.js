@@ -1,5 +1,5 @@
 import './app.scss'
-import formular from './components/formular/formular'
+import formular from './components/form/form'
 import list from './components/list/list'
 
 chayns.ready.then(() => {
@@ -19,7 +19,7 @@ class sites {
     }
 
     _eventlistner() {
-        $button.addEventListener('click', () => new formular()._getFormularData());
+        $button.addEventListener('click', () => new form()._getFormularData());
         $Search.addEventListener('keyup', () => new list()._fetchUrl($Search.value));
     }
 
