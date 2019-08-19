@@ -9,7 +9,7 @@ const $Url = document.querySelector('.formularLine2');
 const $eMail = document.querySelector('.formularLine3');
 const $Kommentar = document.querySelector('.formularLine4');
 const $Search = document.querySelector('.search');
-const http = new XMLHttpRequest();
+let http = new XMLHttpRequest();
 
 let url;
 
@@ -75,14 +75,14 @@ class Tapproject {
             }).then((json) => {
                 this._fillSiteList(json.Data);
             }).catch((ex) => {
-                console.log(PARSING_FAILED, ex)
+                console.log(`Eroor`, ex)
             })
 
     }
 
     _fillSiteList(allData) {
 
-        if (allData.length !== $list.childElementCount) {
+        if (allData.length !== $list.childElementCount || allData.length === 50) {
 
             if ($list.childElementCount > 0) {
                 while ($list.firstChild) {
@@ -105,15 +105,18 @@ class Tapproject {
                 listItemTitle.className = 'list-item__title ellipsis';
 
                 try {
+
                     http.open('HEAD', `https://chayns.tobit.com/storage/${data.siteId}/Images/icon-72.png`, false);
                     http.send();
+
                     listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${data.siteId}/Images/icon-72.png)`;
+
                 } catch {
                     listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)`;
                 }
 
 
-                let listItemTitleNode = document.createTextNode(item.appstoreName);
+                let listItemTitleNode = document.createTextNode(data.appstoreName);
 
                 listItemTitle.appendChild(listItemTitleNode);
                 listItemTitles.appendChild(listItemTitle);
