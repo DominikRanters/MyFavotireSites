@@ -18,11 +18,11 @@ class list {
 
     _fillSiteList(allData, resultCode) {
 
-        if (resultCode === 1 || allData.length !== $list.childElementCount || allData.length === 50) {
+        if (resultCode === 1 || allData.length !== listText.$list.childElementCount || allData.length === 50) {
 
-            if ($list.childElementCount > 0) {
-                while ($list.firstChild) {
-                    $list.removeChild($list.firstChild);
+            if (listText.$list.childElementCount > 0) {
+                while (listText.$list.firstChild) {
+                    listText.$list.removeChild(listText.$list.firstChild);
                 }
             }
             //never Rebase on develop, if you want to keep the feature!!!!
@@ -51,7 +51,7 @@ class list {
                 listItem.appendChild(listItemHeader);
                 listText.$list.appendChild(listItem);
 
-                listText.listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${data.siteId}/`));
+                listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${data.siteId}/`));
             }
         }
     }

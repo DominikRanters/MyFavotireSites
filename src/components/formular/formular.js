@@ -7,10 +7,10 @@ class formular {
             chayns.dialog.alert(formularText.emptyString, formularText.fillAllImportent);
 
         } else if (!formularText.$eMail.value.includes('@')) {
-            chayns.dialog.alert(formularText.emptyString, "Die Email exestiert nicht.");
+            chayns.dialog.alert(formularText.emptyString, formularText.invalidEmail);
 
         } else if (!formularText.$Url.value.includes('.')) {
-            chayns.dialog.alert(formularText.emptyString, "Keine gültige Url");
+            chayns.dialog.alert(formularText.emptyString, formularText.invalidUrl);
 
         } else if (formularText.$Name.value !== formularText.emptyString && formularText.$Url.value !== formularText.emptyString && formularText.$eMail.value !== formularText.emptyString && formularText.$Kommentar.value !== formularText.emptyString) {
             chayns.intercom.sendMessageToPage({
@@ -21,7 +21,7 @@ class formular {
                     formularText.$Url.value = formularText.emptyString;
                     formularText.$eMail.value = formularText.emptyString;
                     formularText.$Kommentar.value = formularText.emptyString;
-                    chayns.dialog.alert(formularText.emptyString, 'Ihre Seite wird geprüft und anschließend hinzugefügt');
+                    chayns.dialog.alert(formularText.emptyString, formularText.sendText);
                 }
             })
 
@@ -33,7 +33,7 @@ class formular {
                     formularText.$Name.value = formularText.emptyString;
                     formularText.$Url.value = formularText.emptyString;
                     formularText.$eMail.value = formularText.emptyString;
-                    chayns.dialog.alert(formularText.emptyString, 'Ihre Seite wird geprüft und anschließend hinzugefügt');
+                    chayns.dialog.alert(formularText.emptyString, formularText.sendText);
                 }
             });
         }
