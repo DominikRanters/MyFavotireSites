@@ -78,16 +78,18 @@ class Tapproject {
     }
 
     _eventlistner() {
-        $button.addEventListener('click', () => this._getFormularData);
+        $button.addEventListener('click', () => this._getFormularData());
         $Search.addEventListener('keyup', () => this._fetchUrl($Search.value));
     }
 
     _getFormularData() {
-        if ($eMail.value.indexOf('@') === -1) {
-            chayns.dialog.alert('', "invalid eMail");
-        } else if ($Url.value.indexOf('https://') === -1) {
-            chayns.dialog.alert('', "invalid Url. you need a https:// site");
-        } else if ($Name.value != '' && $Url.value != '' && $eMail.value != '') {
+        if ($Name.value === '' || $Url.value === '' || $eMail.value === '') {
+            chayns.dialog.alert('', 'Füllen Sie alle Felder mit einem * aus.');
+        } else if ($eMail.value.indexOf('@') === -1) {
+            chayns.dialog.alert('', "Die Email exestiert nicht.");
+        } else if ($Url.value.indexOf('.') === -1) {
+            chayns.dialog.alert('', "Keine gültige Url");
+        } else if ($Name.value !== '' && $Url.value !== '' && $eMail.value !== '') {
             chayns.intercom.sendMessageToPage({
                 text: 'Hier ist meine Seite! Name: ' + $Name.value + '. Url: ' + $Url.value + '. eMail: ' + $eMail.value + '. Kommentar: ' + $Kommentar.value + '.'
             }).then(function(data) {
@@ -96,11 +98,9 @@ class Tapproject {
                     $Url.value = '';
                     $eMail.value = '';
                     $Kommentar.value = '';
-                    chayns.dialog.alert('', 'thank you');
+                    chayns.dialog.alert('', 'Ihre Seite wird geprüft und anschließend hinzugefügt');
                 }
             });
-        } else {
-            chayns.dialog.alert('', 'Alle Felder mit einem * ausfüllen');
         }
     }
 }
