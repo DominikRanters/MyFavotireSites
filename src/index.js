@@ -30,44 +30,50 @@ class Tapproject {
                 return response.json()
             }).then(function(json) {
 
-                if ($list.childElementCount > 0) {
-                    while ($list.firstChild) {
-                        $list.removeChild($list.firstChild);
-                    }
-                }
+                console.log(json.Data.length !== $list.childElementCount)
 
-                for (let item of json.Data) {
+                if (json.Data.length !== $list.childElementCount) {
 
-                    let listItem = document.createElement("div");
-                    listItem.className = "list-item list-item--clickable";
-                    let listItemHeader = document.createElement("div");
-                    listItemHeader.className = 'list-item__header';
-                    let listItemTitles = document.createElement("div");
-                    listItemTitles.className = 'list-item__titles';
-                    let listItemImage = document.createElement('div');
-                    listItemImage.className = 'list-item__image';
-                    let listItemTitle = document.createElement('div');
-                    listItemTitle.className = 'list-item__title ellipsis';
-
-                    try {
-                        http.open('HEAD', `https://chayns.tobit.com/storage/${item.siteId}/Images/icon-72.png`, false);
-                        http.send();
-                        listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${item.siteId}/Images/icon-72.png)`;
-                    } catch {
-                        listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)`;
+                    if ($list.childElementCount > 0) {
+                        while ($list.firstChild) {
+                            $list.removeChild($list.firstChild);
+                        }
                     }
 
 
-                    let listItemTitleNode = document.createTextNode(item.appstoreName);
+                    for (let item of json.Data) {
 
-                    listItemTitle.appendChild(listItemTitleNode);
-                    listItemTitles.appendChild(listItemTitle);
-                    listItemHeader.appendChild(listItemImage);
-                    listItemHeader.appendChild(listItemTitles);
-                    listItem.appendChild(listItemHeader);
-                    $list.appendChild(listItem);
+                        let listItem = document.createElement("div");
+                        listItem.className = "list-item list-item--clickable";
+                        let listItemHeader = document.createElement("div");
+                        listItemHeader.className = 'list-item__header';
+                        let listItemTitles = document.createElement("div");
+                        listItemTitles.className = 'list-item__titles';
+                        let listItemImage = document.createElement('div');
+                        listItemImage.className = 'list-item__image';
+                        let listItemTitle = document.createElement('div');
+                        listItemTitle.className = 'list-item__title ellipsis';
 
-                    listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${item.siteId}/`));
+                        try {
+                            http.open('HEAD', `https://chayns.tobit.com/storage/${item.siteId}/Images/icon-72.png`, false);
+                            http.send();
+                            listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${item.siteId}/Images/icon-72.png)`;
+                        } catch {
+                            listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)`;
+                        }
+
+
+                        let listItemTitleNode = document.createTextNode(item.appstoreName);
+
+                        listItemTitle.appendChild(listItemTitleNode);
+                        listItemTitles.appendChild(listItemTitle);
+                        listItemHeader.appendChild(listItemImage);
+                        listItemHeader.appendChild(listItemTitles);
+                        listItem.appendChild(listItemHeader);
+                        $list.appendChild(listItem);
+
+                        listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${item.siteId}/`));
+                    }
                 }
 
             }).catch(function(ex) {
