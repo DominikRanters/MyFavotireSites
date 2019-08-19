@@ -1,6 +1,8 @@
 import './app.scss'
-import formular from './components/form/form'
+import form from './components/form/form'
+import fomrText from './components/form/text'
 import list from './components/list/list'
+import listText from './components/list/text'
 
 chayns.ready.then(() => {
     chayns.ui.initAll();
@@ -8,8 +10,6 @@ chayns.ready.then(() => {
     new sites();
 }).catch((error) => console.log("No Chayns", error))
 
-const $button = document.querySelector('.button');
-const $Search = document.querySelector('.search');
 
 
 class sites {
@@ -19,14 +19,13 @@ class sites {
     }
 
     _eventlistner() {
-        $button.addEventListener('click', () => new form()._getFormularData());
-        //$Search.addEventListener('keyup', () => new list()._fetchUrl($Search.value));
-        $Search.addEventListener('keyup', () => {
+        fomrText.$button.addEventListener('click', () => new form()._getFormularData());
+        listText.$Search.addEventListener('keyup', () => {
             clearTimeout(this.timeout);
 
             this.timeout = setTimeout(() => {
                 chayns.showWaitCursor()
-                new list()._fetchUrl($Search.value);
+                new list()._fetchUrl(listText.$Search.value);
             }, 1000);
 
         });
