@@ -25,7 +25,6 @@ class list {
                     listText.$list.removeChild(listText.$list.firstChild);
                 }
             }
-            //never Rebase on develop, if you want to keep the feature!!!!
             for (let data of allData) {
 
                 let listItem = document.createElement(listText.div);
@@ -54,6 +53,8 @@ class list {
                 listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${data.siteId}/`));
             }
         }
+        console.log('done');
+        chayns.hideWaitCursor();
     }
 }
 
