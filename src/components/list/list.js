@@ -1,25 +1,24 @@
 const $list = document.querySelector('.sitesList');
-let url;
 
 class list {
 
     _fetchUrl(searchValue) {
 
-        url = `https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=${searchValue}&Skip=0&Take=50`
+        let url = `https://chayns1.tobit.com/TappApi/Site/SlitteApp?SearchString=${searchValue}&Skip=0&Take=50`
 
         fetch(url)
             .then((response) => {
                 return response.json();
             }).then((json) => {
-                this._fillSiteList(json.Data);
+                this._fillSiteList(json.Data, json.ResultCode);
             }).catch((ex) => {
                 console.log(`Eroor`, ex)
             })
     }
 
-    _fillSiteList(allData) {
+    _fillSiteList(allData, resultCode) {
 
-        if (allData.length !== $list.childElementCount || allData.length === 50) {
+        if (resultCode === 1 || allData.length !== $list.childElementCount || allData.length === 50) {
 
             if ($list.childElementCount > 0) {
                 while ($list.firstChild) {
