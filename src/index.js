@@ -52,11 +52,11 @@ class Tapproject {
                     listItemTitle.className = 'list-item__title ellipsis';
 
                     try {
-                        http.open('HEAD', 'https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png', false);
+                        http.open('HEAD', `https://chayns.tobit.com/storage/${jsonData[i].siteId}/Images/icon-72.png`, false);
                         http.send();
-                        listItemImage.style.backgroundImage = 'url(https://chayns.tobit.com/storage/' + jsonData[i].siteId + '/Images/icon-72.png)';
+                        listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/${jsonData[i].siteId}/Images/icon-72.png)`;
                     } catch {
-                        listItemImage.style.backgroundImage = 'url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)';
+                        listItemImage.style.backgroundImage = `url(https://chayns.tobit.com/storage/75508-15270/Images/icon-72.png)`;
                     }
 
 
@@ -68,6 +68,8 @@ class Tapproject {
                     listItemHeader.appendChild(listItemTitles);
                     listItem.appendChild(listItemHeader);
                     $list.appendChild(listItem);
+
+                    listItem.addEventListener("click", () => chayns.openUrlInBrowser(`http://chayns.net/${jsonData[i].siteId}/`));
                 }
 
             }).catch(function(ex) {
@@ -76,7 +78,7 @@ class Tapproject {
     }
 
     _eventlistner() {
-        $button.addEventListener('click', this._getFormularData);
+        $button.addEventListener('click', () => this._getFormularData);
         $Search.addEventListener('keyup', () => this._fetchUrl($Search.value));
     }
 
