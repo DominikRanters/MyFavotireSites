@@ -1,4 +1,4 @@
-const formularText = {
+const formText = {
     $Name: document.querySelector('.formularLine1'),
     $Url: document.querySelector('.formularLine2'),
     $eMail: document.querySelector('.formularLine3'),
@@ -10,4 +10,4 @@ const formularText = {
     sendText: 'Ihre Seite wird geprüft und anschließend hinzugefügt',
 }
 
-export default formularText;
+export default formText;
