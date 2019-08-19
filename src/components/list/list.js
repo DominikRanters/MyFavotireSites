@@ -36,7 +36,7 @@ class list {
                 let listItemTitles = document.createElement("div");
                 listItemTitles.className = 'list-item__titles';
                 let listItemImage = document.createElement('div');
-                listItemImage.className = 'list-item__image';
+                listItemImage.className = 'list-item__image'; //Just for testing
                 let listItemTitle = document.createElement('div');
                 listItemTitle.className = 'list-item__title ellipsis';
 
