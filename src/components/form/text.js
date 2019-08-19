@@ -1,4 +1,5 @@
 const formText = {
+    $button: document.querySelector('.button'),
     $Name: document.querySelector('.formularLine1'),
     $Url: document.querySelector('.formularLine2'),
     $eMail: document.querySelector('.formularLine3'),
