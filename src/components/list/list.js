@@ -25,7 +25,7 @@ class list {
                     $list.removeChild($list.firstChild);
                 }
             }
-
+            //never Rebase on develop, if you want to keep the feature!!!!
             for (let data of allData) {
 
                 let listItem = document.createElement("div");
